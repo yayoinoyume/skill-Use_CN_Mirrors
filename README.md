@@ -5,7 +5,7 @@
 数据底座来自两个久经考验的上游：
 
 - [chsrc](https://github.com/RubyMetric/chsrc)（GPL-3.0）：其 recipe 数据提供了 55+ 个换源目标（npm/PyPI/Go/cargo/apt…）对应的官方源与国内镜像列表，以及每个源的专用测速链接；
-- [Xget](https://github.com/xixu-me/Xget)（AGPL-3.0）：提供 GitHub/HuggingFace/容器 registry 等约 40 类平台的加速前缀映射，用户可用自建节点参与竞速。
+- [Xget](https://github.com/xixu-me/Xget)（AGPL-3.0）：提供 GitHub/HuggingFace/容器 registry 等 80+ 平台前缀的加速映射，用户可用自建节点参与竞速。
 
 ## 它解决什么问题
 
@@ -52,12 +52,13 @@ git clone https://github.com/yayoinoyume/skill-Use_CN_Mirrors.git ~/.agents/skil
         │
         ▼
 ┌─ 阶段一：并行探测（2s 超时）─────────────┐
-│  官方源活着 → 容差优先，直接用官方源        │
-│  官方源死了 → 取延迟最低的前 3 名存活镜像   │
+│  官方源与存活镜像一起进入下一阶段；        │
+│  取延迟最低的前 3 名                      │
 └──────────────────┬───────────────────┘
                    ▼
 ┌─ 阶段二：串行真实下载测速（8s/源）────────┐
-│  按吞吐量（Byte/s）选出最快源              │
+│  官方源与镜像同台比吞吐量（Byte/s），       │
+│  官方源用真实包路径测速，不吃特权           │
 └──────────────────┬───────────────────┘
                    ▼
         命令级临时换源下载（300s 硬顶防挂死）
@@ -84,7 +85,7 @@ python3 scripts/gen_mirrors.py --refresh
 
 - 换源数据提取自 [RubyMetric/chsrc](https://github.com/RubyMetric/chsrc)（GPL-3.0）；
 - 平台前缀映射提取自 [xixu-me/Xget](https://github.com/xixu-me/Xget)（AGPL-3.0）；
-- 本仓库的脚本与文档按同样许可精神开源分发，数据版权归各自上游。
+- 本仓库的脚本与文档以 GPL-3.0 分发（与数据来源 chsrc 同许可）；Xget 数据部分遵循 AGPL-3.0。
 
 ---
 

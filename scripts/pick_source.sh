@@ -49,13 +49,17 @@ xc, tovr = d.get('xget_platforms', {}), (cfg.get('targets') or {}).get(target) o
 disabled = set(tovr.get('disabled_sources') or [])
 pref = tovr.get('preferred_source') or ''
 out = []
+spfx = (t.get('speed_postfix') or '').strip()
 for s in t['sources']:
     tag = 'official' if s['role'] == 'upstream' else (s.get('code') or s.get('sym') or 'mirror')
     if tag in disabled:
         continue
-    out.append({'tag': tag, 'url': s['url'], 'speed_url': s.get('speed_url'),
+    # 官方源无专用测速链接时，用 chsrc 的 speed_postfix 拼真实包路径，保证与镜像同台公平比吞吐
+    speed = s.get('speed_url') or ((s['url'].rstrip('/') + spfx) if (spfx and s['role'] == 'upstream') else None)
+    out.append({'tag': tag, 'url': s['url'], 'speed_url': speed,
                 'priority': 0 if tag == pref else 1, 'kind': 'direct'})
-for node in (cfg.get('xget_nodes') or []):
+for i, node in enumerate(cfg.get('xget_nodes') or [], 1):
+    xtag = f'xget-{i}'
     for s in t['sources']:
         if s['role'] != 'upstream':
             continue
@@ -63,7 +67,7 @@ for node in (cfg.get('xget_nodes') or []):
             upn = up.rstrip('/')
             if s['url'].rstrip('/').startswith(upn):
                 xurl = node.rstrip('/') + '/' + pfx + s['url'].rstrip('/')[len(upn):]
-                out.append({'tag': 'xget', 'url': xurl, 'speed_url': None,
+                out.append({'tag': xtag, 'url': xurl, 'speed_url': (xurl.rstrip('/') + spfx) if spfx else None,
                             'priority': 0 if pref.startswith('xget') else 1, 'kind': 'xget'})
                 break
 print(json.dumps(out, ensure_ascii=False))
@@ -79,9 +83,9 @@ for c in json.loads(sys.argv[1]): print(c['tag'], c['url'])
 " "$CANDIDATES" > "$CANDFILE"
 probe() {  # $1=tag $2=url
   local r
-  r=$(curl -sS -m "$TIMEOUT_PROBE" -o /dev/null -I -L -w "%{http_code} %{time_total}" -A "$UA" "$2" 2>/dev/null) || return
+  r=$(curl -sS -m "$TIMEOUT_PROBE" -o /dev/null -L -r 0-0 -w "%{http_code} %{time_total}" -A "$UA" "$2" 2>/dev/null) || return
   local code=${r%% *}
-  [[ "$code" =~ ^(200|301|302|307|308)$ ]] && echo "$1 ${r#* } $2" >> "$PROBEFILE"
+  [[ "$code" =~ ^(200|206|301|302|307|308|416)$ ]] && echo "$1 ${r#* } $2" >> "$PROBEFILE"
 }
 pids=()
 while read -r tag url; do
@@ -101,8 +105,11 @@ finalists() {
   done | sort -n | head -n "$FINALISTS"
 }
 
-# 官方容差优先
-if [[ -n "${PROBE[official]:-}" && "$ACTION" != "bench" ]]; then
+# 官方存活时也给它测速机会：官方与镜像同台竞速，官方不输则用官方
+# （官方存活且唯一存活 → 直接用官方，不必测速）
+OFFICIAL_ALIVE=0
+[[ -n "${PROBE[official]:-}" ]] && OFFICIAL_ALIVE=1
+if [[ "$OFFICIAL_ALIVE" == 1 && "${#PROBE[@]}" -eq 1 && "$ACTION" != "bench" ]]; then
   echo "${PROBE[official]#* }"
   exit 0
 fi
@@ -135,5 +142,15 @@ if [[ "$ACTION" == "bench" ]]; then
 fi
 
 WINNER=$(sort -rn "$RESULT" | head -1 | cut -d' ' -f2-)
-[[ -n "${PROBE[$WINNER]:-}" ]] || exit 2   # 全部测速失败
+[[ -n "${PROBE[$WINNER]:-}" ]] || { echo "所有候选源测速均失败" >&2; exit 2; }
+# 用户偏好源存活 → 优先返回
+PREF=$(python3 -c "
+import json,sys
+for c in json.loads(sys.argv[1]):
+    if c.get('priority')==0: print(c['tag']); break
+" "$CANDIDATES")
+if [[ -n "$PREF" && -n "${PROBE[$PREF]:-}" ]]; then
+  echo "${PROBE[$PREF]#* }"
+  exit 0
+fi
 echo "${PROBE[$WINNER]#* }"

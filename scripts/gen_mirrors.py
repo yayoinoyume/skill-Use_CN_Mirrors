@@ -10,6 +10,7 @@
 import argparse
 import json
 import re
+import shutil
 import sys
 import urllib.request
 from pathlib import Path
@@ -55,7 +56,7 @@ def parse_mirrors(c_text: str, mirrors: dict | None = None) -> dict:
         strings = STR_RE.findall(body)
         if len(strings) < 4:
             continue
-        urls = [x for x in strings if x.startswith("http")]
+        urls = [x for x in strings if x.startswith(("http://", "https://")) and "\n" not in x]
         entry = {
             "code": strings[0],
             "abbr": strings[1],
@@ -98,13 +99,13 @@ def parse_recipe(path: Path, mirrors: dict) -> dict | None:
         # 收集行内注释作为备注
         if stripped.startswith("//"):
             note = stripped.lstrip("/ ").strip()
-            if note:
+            if note and "&" not in note and "}" not in note:
                 notes.append(note)
             continue
         sm = SOURCE_LINE_RE.search(line)
         if not sm:
             inline = NOTE_RE.search(stripped)
-            if inline and sources:
+            if inline and sources and "&" not in inline.group(1) and "}" not in inline.group(1):
                 notes.append(inline.group(1))
             continue
         sym, url = sm.group(1), sm.group(2)
@@ -177,7 +178,6 @@ def parse_xget_catalog(js_text: str) -> dict:
 def load_inputs(chsrc_dir: Path | None, xget_path: Path | None):
     import tarfile
     import tempfile
-    import shutil
     tmp = None
     if chsrc_dir is None:
         tmp = tempfile.mkdtemp(prefix="chsrc-")
@@ -230,16 +230,16 @@ def main():
         xget = parse_xget_catalog(xget_path.read_text(encoding="utf-8", errors="replace"))
         print(f"解析到 {len(xget)} 个 xget 平台前缀", file=sys.stderr)
 
-        # 把 chsrc 未覆盖的 xget 平台补成合成目标
-        covered_upstreams = {s['url'].rstrip('/') for t in targets.values() for s in t['sources'] if s['role'] == 'upstream'}
+        # 把 chsrc 未覆盖的 xget 平台补成合成目标：
+        # 仅当键名不存在、且不与任何现有键的别名段冲突时才创建（chsrc 已覆盖的平台绝不重复/遮蔽）
         rename = {'gh': 'github', 'gl': 'gitlab', 'sf': 'sourceforge', 'hf': 'huggingface',
                   'aosp': 'aosp', 'arxiv': 'arxiv', 'fdroid': 'fdroid', 'jenkins': 'jenkins',
                   'civitai': 'civitai', 'gist': 'gist'}
+        existing_segments = {seg for k in targets for seg in k.split('/')}
         for pfx, up in xget.items():
-            upn = up.rstrip('/')
-            if upn in covered_upstreams:
-                continue
             key = rename.get(pfx, pfx)
+            if key in targets or key in existing_segments:
+                continue
             targets[key] = {
                 'dish': key, 'file': '(xget)', 'speed_postfix': None, 'notes': [f'来自 xget 平台表，前缀 {pfx}'],
                 'sources': [{'role': 'upstream', 'url': up + '/', 'note': None}],

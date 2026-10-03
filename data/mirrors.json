@@ -4,7 +4,7 @@
   "generated_on": "2026-10-03",
   "chsrc": "https://github.com/RubyMetric/chsrc (GPL-3.0)",
   "xget": "https://github.com/xixu-me/Xget (AGPL-3.0)",
-  "target_count": 128
+  "target_count": 119
  },
  "targets": {
   "clojure/clojars/cloj/lein": {
@@ -24,7 +24,7 @@
      "code": "mirrorz",
      "name": "校园网联合镜像站(MirrorZ)",
      "url": "https://mirrors.cernet.edu.cn/clojars/",
-     "speed_url": "https:\n  {NotSkip, NA, NA, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -177,8 +177,7 @@
    "file": "Go.c",
    "speed_postfix": null,
    "notes": [
-    "暂时停用华为镜像源, 详见 https://github.com/RubyMetric/chsrc/issues/227",
-    "{&Huawei,        \"https://mirrors.huaweicloud.com/goproxy/\", DelegateToMirror},"
+    "暂时停用华为镜像源, 详见 https://github.com/RubyMetric/chsrc/issues/227"
    ],
    "sources": [
     {
@@ -192,7 +191,7 @@
      "code": "goproxy.cn",
      "name": "Goproxy.cn (七牛云)",
      "url": "https://goproxy.cn",
-     "speed_url": "https:\n  {&GoProxyCN,        ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -210,7 +209,7 @@
      "code": "goproxy.io",
      "name": "GOPROXY.IO",
      "url": "https://goproxy.io",
-     "speed_url": "https:\n  {&GoProxyCN,        ",
+     "speed_url": null,
      "note": null
     }
    ]
@@ -559,9 +558,7 @@
    "dish": "php/composer",
    "file": "PHP.c",
    "speed_postfix": null,
-   "notes": [
-    "{&Tencent_Intra, \"https://mirrors.tencentyun.com/composer/\", DelegateToMirror},"
-   ],
+   "notes": [],
    "sources": [
     {
      "role": "upstream",
@@ -602,8 +599,7 @@
    "file": "Perl.c",
    "speed_postfix": "authors/id/D/DB/DBAURAIN/Bio-MUST-Apps-FortyTwo-0.213470.tar.gz",
    "notes": [
-    "@note 2026-09-06 CQU 全面封杀校外ip，弃用",
-    "{&Cqu,              \"https://mirrors.cqu.edu.cn/CPAN/\",           FeedByPrepare},"
+    "@note 2026-09-06 CQU 全面封杀校外ip，弃用"
    ],
    "sources": [
     {
@@ -617,7 +613,7 @@
      "code": "mirrorz",
      "name": "校园网联合镜像站(MirrorZ)",
      "url": "https://mirrors.cernet.edu.cn/CPAN/",
-     "speed_url": "https:\n  {NotSkip, NA, NA, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -732,15 +728,125 @@
   },
   "pypi": {
    "dish": "pypi",
-   "file": "(xget)",
+   "file": "PyPI.c",
    "speed_postfix": null,
    "notes": [
-    "来自 xget 平台表，前缀 pypi"
+    "不要添加Zju，浙大的PyPI服务在校外访问会自动转向Tuna",
+    "2025-09-29 此源已停用",
+    "@ref https://mirrors.jlu.edu.cn/_news/#2025-04-06-pypi-repo-down"
    ],
    "sources": [
     {
      "role": "upstream",
-     "url": "https://pypi.org/",
+     "url": "https://pypi.org/simple",
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "MirrorZ",
+     "code": "mirrorz",
+     "name": "校园网联合镜像站(MirrorZ)",
+     "url": "https://mirrors.cernet.edu.cn/pypi/web/simple",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Bfsu",
+     "code": "bfsu",
+     "name": "北京外国语大学开源软件镜像站",
+     "url": "https://mirrors.bfsu.edu.cn/pypi/web/simple",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Lzuoss",
+     "code": "lzu",
+     "name": "兰州大学开源社区镜像站",
+     "url": "https://mirror.lzu.edu.cn/pypi/web/simple",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Sjtug_Siyuan",
+     "code": "sjtu-sy",
+     "name": "上海交通大学思源镜像站",
+     "url": "https://mirror.sjtu.edu.cn/pypi/web/simple",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Tuna",
+     "code": "tuna",
+     "name": "清华大学开源软件镜像站",
+     "url": "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Ustc",
+     "code": "ustc",
+     "name": "中国科学技术大学开源软件镜像",
+     "url": "https://mirrors.ustc.edu.cn/pypi/simple",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Ali",
+     "code": "ali",
+     "name": "阿里巴巴开源镜像站(公网)",
+     "url": "https://mirrors.aliyun.com/pypi/simple",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Nju",
+     "code": "nju",
+     "name": "南京大学开源镜像站",
+     "url": "https://mirror.nju.edu.cn/pypi/web/simple",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Pku",
+     "code": "pku",
+     "name": "北京大学开源镜像站",
+     "url": "https://mirrors.pku.edu.cn/pypi/web/simple",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Tencent",
+     "code": "tencent",
+     "name": "腾讯软件源(公网)",
+     "url": "https://mirrors.cloud.tencent.com/pypi/simple",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Huawei",
+     "code": "huawei",
+     "name": "华为开源镜像站",
+     "url": "https://mirrors.huaweicloud.com/repository/pypi/simple",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Hust",
+     "code": "hust",
+     "name": "华中科技大学开源镜像站",
+     "url": "https://mirrors.hust.edu.cn/pypi/web/simple",
+     "speed_url": null,
      "note": null
     }
    ]
@@ -749,12 +855,7 @@
    "dish": "r/cran",
    "file": "R.c",
    "speed_postfix": null,
-   "notes": [
-    "{&Ali,           \"https://mirrors.aliyun.com/CRAN/\",           DelegateToMirror},",
-    "{&Sustech,       \"https://mirrors.sustech.edu.cn/CRAN\",        DelegateToMirror},",
-    "{&Bfsu,          \"https://mirrors.bfsu.edu.cn/CRAN/\",          DelegateToMirror},",
-    "{&Bjtu,          \"https://mirror.bjtu.edu.cn/cran/\",           DelegateToMirror},"
-   ],
+   "notes": [],
    "sources": [
     {
      "role": "upstream",
@@ -786,14 +887,7 @@
    "file": "Ruby.c",
    "speed_postfix": null,
    "notes": [
-    "https://ruby-china.org/topics/44619",
-    "{&RubyChina,        \"https://gems.ruby-china.com/\",                   DelegateToMirror},",
-    "{&Tuna,          \"https://mirrors.tuna.tsinghua.edu.cn/rubygems/\", DelegateToMirror},",
-    "{&Bfsu,          \"https://mirrors.bfsu.edu.cn/rubygems/\",          DelegateToMirror},",
-    "{&Tencent,       \"https://mirrors.tencent.com/rubygems/\",                DelegateToMirror},",
-    "{&Tencent_Intra, \"https://mirrors.tencentyun.com/rubygems/\",             DelegateToMirror},",
-    "{&Ali,           \"https://mirrors.aliyun.com/rubygems/\",                 DelegateToMirror},",
-    "{&Huawei,        \"https://mirrors.huaweicloud.com/repository/rubygems/\", DelegateToMirror},"
+    "https://ruby-china.org/topics/44619"
    ],
    "sources": [
     {
@@ -817,10 +911,7 @@
    "file": "Cargo.c",
    "speed_postfix": null,
    "notes": [
-    "{&Nju,        \"https://mirror.nju.edu.cn/git/crates.io-index.git/\",   FeedByPrepare},",
-    "{&Hust,       \"https://mirrors.hust.edu.cn/crates.io-index/\", FeedByPrepare},",
-    "@note 2026-09-06 CQU 全面封杀校外ip，弃用",
-    "{&Cqu,           \"https://mirrors.cqu.edu.cn/crates.io-index/\",  NULL}"
+    "@note 2026-09-06 CQU 全面封杀校外ip，弃用"
    ],
    "sources": [
     {
@@ -834,7 +925,7 @@
      "code": "mirrorz",
      "name": "校园网联合镜像站(MirrorZ)",
      "url": "https://mirrors.cernet.edu.cn/crates.io-index/",
-     "speed_url": "https:\n  {NotSkip, NA, NA, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -907,10 +998,7 @@
    "file": "rustup.c",
    "speed_postfix": "/rustup/dist/x86_64-unknown-linux-gnu/rustup-init",
    "notes": [
-    "2026-09-06 以下镜像源因长期不更新而弃用",
-    "{&Iscas,            \"https://mirror.iscas.ac.cn/rustup\",            FeedByPrepare},",
-    "{&Sjtug_Zhiyuan,    \"https://mirror.sjtu.edu.cn/rust-static\",       FeedByPrepare},",
-    "{&Ali,              \"https://mirrors.aliyun.com/rustup\",            FeedByPrepare},"
+    "2026-09-06 以下镜像源因长期不更新而弃用"
    ],
    "sources": [
     {
@@ -924,7 +1012,7 @@
      "code": "mirrorz",
      "name": "校园网联合镜像站(MirrorZ)",
      "url": "https://mirrors.cernet.edu.cn/rustup",
-     "speed_url": "https:\n  {NotSkip, NA, NA, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -1000,7 +1088,7 @@
      "code": "mirrorz",
      "name": "校园网联合镜像站(MirrorZ)",
      "url": "https://mirrors.cernet.edu.cn/armbian",
-     "speed_url": "https:\n  {NotSkip, NA, NA, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -1070,15 +1158,76 @@
   },
   "debian": {
    "dish": "debian",
-   "file": "(xget)",
-   "speed_postfix": null,
-   "notes": [
-    "来自 xget 平台表，前缀 debian"
-   ],
+   "file": "Debian.c",
+   "speed_postfix": "/dists/bookworm/main/Contents-all.gz",
+   "notes": [],
    "sources": [
     {
      "role": "upstream",
-     "url": "https://deb.debian.org/",
+     "url": "http://deb.debian.org/debian",
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "MirrorZ",
+     "code": "mirrorz",
+     "name": "校园网联合镜像站(MirrorZ)",
+     "url": "https://mirrors.cernet.edu.cn/debian",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Ali",
+     "code": "ali",
+     "name": "阿里巴巴开源镜像站(公网)",
+     "url": "https://mirrors.aliyun.com/debian",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Volcengine",
+     "code": "volc",
+     "name": "火山引擎开源软件镜像站(公网)",
+     "url": "https://mirrors.volces.com/debian",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Bfsu",
+     "code": "bfsu",
+     "name": "北京外国语大学开源软件镜像站",
+     "url": "https://mirrors.bfsu.edu.cn/debian",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Ustc",
+     "code": "ustc",
+     "name": "中国科学技术大学开源软件镜像",
+     "url": "https://mirrors.ustc.edu.cn/debian",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Tuna",
+     "code": "tuna",
+     "name": "清华大学开源软件镜像站",
+     "url": "https://mirrors.tuna.tsinghua.edu.cn/debian",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Tencent",
+     "code": "tencent",
+     "name": "腾讯软件源(公网)",
+     "url": "https://mirrors.tencent.com/debian",
+     "speed_url": null,
      "note": null
     }
    ]
@@ -1087,10 +1236,7 @@
    "dish": "kali",
    "file": "Kali-Linux.c",
    "speed_postfix": null,
-   "notes": [
-    "{&Ali,              \"https://mirrors.aliyun.com/kali\",    DelegateToMirror},",
-    "{&Huawei,     \"https://mirrors.huaweicloud.com/kali\",   DelegateToMirror},"
-   ],
+   "notes": [],
    "sources": [
     {
      "role": "upstream",
@@ -1103,7 +1249,7 @@
      "code": "mirrorz",
      "name": "校园网联合镜像站(MirrorZ)",
      "url": "https://mirrors.cernet.edu.cn/kali",
-     "speed_url": "https:\n  {NotSkip, NA, NA, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -1170,7 +1316,7 @@
      "code": "mirrorz",
      "name": "校园网联合镜像站(MirrorZ)",
      "url": "https://mirrors.cernet.edu.cn/linuxliteos/",
-     "speed_url": "https:\n  {NotSkip, NA, NA, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -1197,9 +1343,7 @@
    "dish": "linuxmint",
    "file": "Linux-Mint.c",
    "speed_postfix": null,
-   "notes": [
-    "{&Netease,     \"https://mirrors.163.com/linuxmint/packages/\",       DelegateToMirror}"
-   ],
+   "notes": [],
    "sources": [
     {
      "role": "upstream",
@@ -1212,7 +1356,7 @@
      "code": "mirrorz",
      "name": "校园网联合镜像站(MirrorZ)",
      "url": "https://mirrors.cernet.edu.cn/linuxmint/",
-     "speed_url": "https:\n  {NotSkip, NA, NA, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -1320,11 +1464,7 @@
    "dish": "ros/ros2",
    "file": "ROS.c",
    "speed_postfix": null,
-   "notes": [
-    "{&Tencent_Intra, \"https://mirrors.tencentyun.com\", DelegateToMirror},",
-    "{&Netease,       \"https://mirrors.163.com\", DelegateToMirror},",
-    "{&Sohu,          \"https://mirrors.sohu.com\", DelegateToMirror}"
-   ],
+   "notes": [],
    "sources": [
     {
      "role": "upstream",
@@ -1406,7 +1546,7 @@
      "code": "mirrorz",
      "name": "校园网联合镜像站(MirrorZ)",
      "url": "https://mirrors.cernet.edu.cn/raspberrypi/",
-     "speed_url": "https:\n  {NotSkip, NA, NA, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -1594,7 +1734,7 @@
      "code": "mirrorz",
      "name": "校园网联合镜像站(MirrorZ)",
      "url": "https://mirrors.cernet.edu.cn/trisquel/",
-     "speed_url": "https:\n  {NotSkip, NA, NA, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -1639,11 +1779,7 @@
    "dish": "ubuntu/zorinos",
    "file": "Ubuntu.c",
    "speed_postfix": "/dists/noble/Contents-amd64.gz",
-   "notes": [
-    "{&Tencent_Intra, \"https://mirrors.tencentyun.com/ubuntu\",FeedByPrepare},",
-    "{&Netease,          \"https://mirrors.163.com/ubuntu\", FeedByPrepare},",
-    "{&Sohu,             \"https://mirrors.sohu.com/ubuntu\", FeedByPrepare}"
-   ],
+   "notes": [],
    "sources": [
     {
      "role": "upstream",
@@ -1656,7 +1792,7 @@
      "code": "mirrorz",
      "name": "校园网联合镜像站(MirrorZ)",
      "url": "https://mirrors.cernet.edu.cn/ubuntu",
-     "speed_url": "https:\n  {NotSkip, NA, NA, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -1728,11 +1864,7 @@
    "dish": "deepin",
    "file": "deepin.c",
    "speed_postfix": null,
-   "notes": [
-    "{&Tencent_Intra, \"https://mirrors.tencentyun.com/deepin\",     DelegateToMirror},",
-    "{&Netease,       \"https://mirrors.163.com/deepin\",             DelegateToMirror},",
-    "{&Sohu,          \"https://mirrors.sohu.com/deepin\",            DelegateToMirror}"
-   ],
+   "notes": [],
    "sources": [
     {
      "role": "upstream",
@@ -1897,9 +2029,7 @@
    "dish": "netbsd",
    "file": "NetBSD.c",
    "speed_postfix": null,
-   "notes": [
-    "{&Tencent_Intra, \"https://mirrors.tencentyun.com/pkgsrc/packages/NetBSD/\", DelegateToMirror},"
-   ],
+   "notes": [],
    "sources": [
     {
      "role": "upstream",
@@ -1912,7 +2042,7 @@
      "code": "mirrorz",
      "name": "校园网联合镜像站(MirrorZ)",
      "url": "https://mirrors.cernet.edu.cn/pkgsrc/packages/NetBSD/",
-     "speed_url": "https:\n  {NotSkip, NA, NA, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -1993,9 +2123,7 @@
    "dish": "openbsd",
    "file": "OpenBSD.c",
    "speed_postfix": null,
-   "notes": [
-    "{&Tencent_Intra, \"https://mirrors.tencentyun.com/OpenBSD/\", DelegateToMirror},"
-   ],
+   "notes": [],
    "sources": [
     {
      "role": "upstream",
@@ -2008,7 +2136,7 @@
      "code": "mirrorz",
      "name": "校园网联合镜像站(MirrorZ)",
      "url": "https://mirrors.cernet.edu.cn/OpenBSD/",
-     "speed_url": "https:\n  {NotSkip, NA, NA, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -2129,7 +2257,7 @@
      "code": "mirrorz",
      "name": "校园网联合镜像站(MirrorZ)",
      "url": "https://mirrors.cernet.edu.cn/openwrt",
-     "speed_url": "https:\n  {NotSkip, NA, NA, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -2368,15 +2496,58 @@
   },
   "fedora": {
    "dish": "fedora",
-   "file": "(xget)",
+   "file": "Fedora-Linux.c",
    "speed_postfix": null,
-   "notes": [
-    "来自 xget 平台表，前缀 fedora"
-   ],
+   "notes": [],
    "sources": [
     {
      "role": "upstream",
-     "url": "https://mirrors.kernel.org/fedora/",
+     "url": "http://download.example/pub/fedora/linux",
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Ali",
+     "code": "ali",
+     "name": "阿里巴巴开源镜像站(公网)",
+     "url": "https://mirrors.aliyun.com/fedora",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Bfsu",
+     "code": "bfsu",
+     "name": "北京外国语大学开源软件镜像站",
+     "url": "https://mirrors.bfsu.edu.cn/fedora",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Ustc",
+     "code": "ustc",
+     "name": "中国科学技术大学开源软件镜像",
+     "url": "https://mirrors.ustc.edu.cn/fedora",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Tuna",
+     "code": "tuna",
+     "name": "清华大学开源软件镜像站",
+     "url": "https://mirrors.tuna.tsinghua.edu.cn/fedora",
+     "speed_url": null,
+     "note": null
+    },
+    {
+     "role": "mirror",
+     "sym": "Tencent",
+     "code": "tencent",
+     "name": "腾讯软件源(公网)",
+     "url": "https://mirrors.tencent.com/fedora",
+     "speed_url": null,
      "note": null
     }
    ]
@@ -2385,10 +2556,7 @@
    "dish": "rocky/rockylinux",
    "file": "Rocky-Linux.c",
    "speed_postfix": null,
-   "notes": [
-    "{&Netease,          \"https://mirrors.163.com/rocky\",      DelegateToMirror},",
-    "{&Sohu,             \"https://mirrors.sohu.com/Rocky\",     DelegateToMirror}"
-   ],
+   "notes": [],
    "sources": [
     {
      "role": "upstream",
@@ -2401,7 +2569,7 @@
      "code": "mirrorz",
      "name": "校园网联合镜像站(MirrorZ)",
      "url": "https://mirrors.cernet.edu.cn/rocky",
-     "speed_url": "https:\n  {NotSkip, NA, NA, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -2464,11 +2632,7 @@
    "dish": "openeuler",
    "file": "openEuler.c",
    "speed_postfix": "https://repo.openeuler.org/openEuler-24.03-LTS/ISO/x86_64/openEuler-24.03-LTS-netinst-x86_64-dvd.iso",
-   "notes": [
-    "{&Tencent_Intra, \"https://mirrors.tencentyun.com/openeuler/\", FeedByPrepare},",
-    "{&Netease,          \"https://mirrors.163.com/openeuler/\",  FeedByPrepare}",
-    "{&Sohu,             \"https://mirrors.sohu.com/openeuler/\", FeedByPrepare}"
-   ],
+   "notes": [],
    "sources": [
     {
      "role": "upstream",
@@ -2664,10 +2828,7 @@
    "dish": "msys2/msys",
    "file": "MSYS2.c",
    "speed_postfix": null,
-   "notes": [
-    "{&Netease,          \"https://mirrors.163.com/msys2\",  DelegateToMirror},",
-    "{&Sohu,             \"https://mirrors.sohu.com/msys2\", DelegateToMirror}"
-   ],
+   "notes": [],
    "sources": [
     {
      "role": "upstream",
@@ -2899,7 +3060,7 @@
      "code": "daocloud",
      "name": "上海道客网络科技有限公司",
      "url": "https://docker.m.daocloud.io",
-     "speed_url": "https:\n  {SKIP, ToFill, ToFill, NULL, ROUGH}\n};\n\ndef_dish(wr_docker, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -2930,7 +3091,7 @@
      "code": "mirrorz",
      "name": "校园网联合镜像站(MirrorZ)",
      "url": "https://help.mirrors.cernet.edu.cn/elpa/",
-     "speed_url": "https:\n  {NotSkip, NA, NA, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -3108,7 +3269,7 @@
      "code": "mirrorz",
      "name": "校园网联合镜像站(MirrorZ)",
      "url": "https://mirrors.cernet.edu.cn/nix-channels/",
-     "speed_url": "https:\n  {NotSkip, NA, NA, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -3171,15 +3332,7 @@
    "dish": "latex/ctan/tex/texlive/miktex/tlmgr/mpm",
    "file": "TeX-Live.c",
    "speed_postfix": null,
-   "notes": [
-    "mirrors.sustech.edu.cn/CTAN/systems/texlive/tlnet/archive/fandol.tar.xz\"},",
-    "mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/tlnet/archive/fandol.tar.xz\"},",
-    "mirrors.bfsu.edu.cn/CTAN/systems/texlive/tlnet/archive/fandol.tar.xz\"},",
-    "mirror.bjtu.edu.cn/ctan/systems/texlive/tlnet/archive/fandol.tar.xz\"},",
-    "mirror.lzu.edu.cn/CTAN/systems/texlive/tlnet/archive/fandol.tar.xz\"},",
-    "mirrors.jlu.edu.cn/CTAN/systems/texlive/tlnet/archive/fandol.tar.xz\"},",
-    "mirrors.sustech.edu.cn/CTAN/systems/texlive/tlnet/archive/fandol.tar.xz\"}"
-   ],
+   "notes": [],
    "sources": [
     {
      "role": "upstream",
@@ -3192,7 +3345,7 @@
      "code": "mirrorz",
      "name": "校园网联合镜像站(MirrorZ)",
      "url": "https://mirrors.cernet.edu.cn/CTAN/systems/texlive/tlnet",
-     "speed_url": "https:\n  {NotSkip, NA, NA, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -3277,7 +3430,7 @@
      "code": "mirrorz",
      "name": "校园网联合镜像站(MirrorZ)",
      "url": "https://mirrors.cernet.edu.cn/winget-source",
-     "speed_url": "https:\n  {NotSkip, NA, NA, ",
+     "speed_url": null,
      "note": null
     },
     {
@@ -3483,21 +3636,6 @@
     }
    ]
   },
-  "maven": {
-   "dish": "maven",
-   "file": "(xget)",
-   "speed_postfix": null,
-   "notes": [
-    "来自 xget 平台表，前缀 maven"
-   ],
-   "sources": [
-    {
-     "role": "upstream",
-     "url": "https://repo1.maven.org/",
-     "note": null
-    }
-   ]
-  },
   "apache": {
    "dish": "apache",
    "file": "(xget)",
@@ -3509,36 +3647,6 @@
     {
      "role": "upstream",
      "url": "https://downloads.apache.org/",
-     "note": null
-    }
-   ]
-  },
-  "gradle": {
-   "dish": "gradle",
-   "file": "(xget)",
-   "speed_postfix": null,
-   "notes": [
-    "来自 xget 平台表，前缀 gradle"
-   ],
-   "sources": [
-    {
-     "role": "upstream",
-     "url": "https://plugins.gradle.org/",
-     "note": null
-    }
-   ]
-  },
-  "homebrew": {
-   "dish": "homebrew",
-   "file": "(xget)",
-   "speed_postfix": null,
-   "notes": [
-    "来自 xget 平台表，前缀 homebrew"
-   ],
-   "sources": [
-    {
-     "role": "upstream",
-     "url": "https://github.com/Homebrew/",
      "note": null
     }
    ]
@@ -3573,36 +3681,6 @@
     }
    ]
   },
-  "ctan": {
-   "dish": "ctan",
-   "file": "(xget)",
-   "speed_postfix": null,
-   "notes": [
-    "来自 xget 平台表，前缀 ctan"
-   ],
-   "sources": [
-    {
-     "role": "upstream",
-     "url": "https://tug.ctan.org/",
-     "note": null
-    }
-   ]
-  },
-  "nuget": {
-   "dish": "nuget",
-   "file": "(xget)",
-   "speed_postfix": null,
-   "notes": [
-    "来自 xget 平台表，前缀 nuget"
-   ],
-   "sources": [
-    {
-     "role": "upstream",
-     "url": "https://api.nuget.org/",
-     "note": null
-    }
-   ]
-  },
   "packagist": {
    "dish": "packagist",
    "file": "(xget)",
@@ -3614,66 +3692,6 @@
     {
      "role": "upstream",
      "url": "https://repo.packagist.org/",
-     "note": null
-    }
-   ]
-  },
-  "flathub": {
-   "dish": "flathub",
-   "file": "(xget)",
-   "speed_postfix": null,
-   "notes": [
-    "来自 xget 平台表，前缀 flathub"
-   ],
-   "sources": [
-    {
-     "role": "upstream",
-     "url": "https://dl.flathub.org/",
-     "note": null
-    }
-   ]
-  },
-  "ubuntu": {
-   "dish": "ubuntu",
-   "file": "(xget)",
-   "speed_postfix": null,
-   "notes": [
-    "来自 xget 平台表，前缀 ubuntu"
-   ],
-   "sources": [
-    {
-     "role": "upstream",
-     "url": "https://archive.ubuntu.com/",
-     "note": null
-    }
-   ]
-  },
-  "rocky": {
-   "dish": "rocky",
-   "file": "(xget)",
-   "speed_postfix": null,
-   "notes": [
-    "来自 xget 平台表，前缀 rocky"
-   ],
-   "sources": [
-    {
-     "role": "upstream",
-     "url": "https://download.rockylinux.org/",
-     "note": null
-    }
-   ]
-  },
-  "arch": {
-   "dish": "arch",
-   "file": "(xget)",
-   "speed_postfix": null,
-   "notes": [
-    "来自 xget 平台表，前缀 arch"
-   ],
-   "sources": [
-    {
-     "role": "upstream",
-     "url": "https://geo.mirror.pkgbuild.com/",
      "note": null
     }
    ]
