@@ -98,6 +98,12 @@ while read -r tag rest; do
   [[ -n "$tag" ]] && PROBE[$tag]="$rest"
 done < "$PROBEFILE"
 
+# 全部候选探测失败：立即退出（必须在任何数组展开之前，set -u 下空数组引用会报错）
+if [[ ! -s "$PROBEFILE" ]]; then
+  echo "所有候选源测速均失败" >&2
+  exit 2
+fi
+
 # 阶段二专用: 存活源按延迟排序取前 N
 finalists() {
   for tag in "${!PROBE[@]}"; do
