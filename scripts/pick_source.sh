@@ -137,12 +137,13 @@ for c in json.loads(sys.argv[1]):
 done < "$LIST"
 
 if [[ "$ACTION" == "bench" ]]; then
+  [[ -s "$RESULT" ]] || { echo "所有候选源测速均失败" >&2; exit 2; }
   sort -rn "$RESULT"
   exit 0
 fi
 
 WINNER=$(sort -rn "$RESULT" | head -1 | cut -d' ' -f2-)
-[[ -n "${PROBE[$WINNER]:-}" ]] || { echo "所有候选源测速均失败" >&2; exit 2; }
+[[ ${#PROBE[@]} -gt 0 ]] || { echo "所有候选源测速均失败" >&2; exit 2; }
 # 用户偏好源存活 → 优先返回
 PREF=$(python3 -c "
 import json,sys

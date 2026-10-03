@@ -28,7 +28,7 @@ STR_RE = re.compile(r'"((?:[^"\\]|\\.)*)"')
 
 def strip_c_comments(text: str) -> str:
     text = re.sub(r"/\*.*?\*/", "", text, flags=re.S)
-    return re.sub(r"//[^\n]*", "", text)
+    return re.sub(r"(?<!:)//[^\n]*", "", text)  # 负向断言排除 URL 的 ://
 
 
 MIRROR_BLOCK_RE = re.compile(r"\b([A-Z]\w*)\s*=\s*\n?\{", re.M)
