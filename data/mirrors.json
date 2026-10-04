@@ -1,7 +1,7 @@
 {
  "_meta": {
   "description": "国内镜像源数据，由 scripts/gen_mirrors.py 从 chsrc 与 xget 上游提取。勿手改，用 --refresh 更新。",
-  "generated_on": "2026-10-03",
+  "generated_on": "2026-10-04",
   "chsrc": "https://github.com/RubyMetric/chsrc (GPL-3.0)",
   "xget": "https://github.com/xixu-me/Xget (AGPL-3.0)",
   "target_count": 119
@@ -88,10 +88,10 @@
     {
      "role": "mirror",
      "sym": "FlutterCN",
-     "code": "fluttercn",
-     "name": "FlutterCN",
+     "code": "cfug",
+     "name": "Flutter 社区",
      "url": "https://storage.flutter-io.cn",
-     "speed_url": null,
+     "speed_url": "https://storage.flutter-io.cn/flutter_infra_release/releases/stable/linux/flutter_linux_v1.0.0-stable.tar.xz",
      "note": null
     },
     {
@@ -137,10 +137,10 @@
     {
      "role": "mirror",
      "sym": "FlutterCN",
-     "code": "fluttercn",
-     "name": "FlutterCN",
+     "code": "cfug",
+     "name": "Flutter 社区",
      "url": "https://pub.flutter-io.cn",
-     "speed_url": null,
+     "speed_url": "https://storage.flutter-io.cn/flutter_infra_release/releases/stable/linux/flutter_linux_v1.0.0-stable.tar.xz",
      "note": null
     },
     {
@@ -932,9 +932,9 @@
      "role": "mirror",
      "sym": "RsProxyCN",
      "code": "rsproxycn",
-     "name": "RsProxyCN",
+     "name": "字节跳动基础架构Dev Infra",
      "url": "https://rsproxy.cn/index/",
-     "speed_url": null,
+     "speed_url": "https://rsproxy.cn/api/v1/crates/windows/0.58.0/download",
      "note": "rsproxy.cn/\" url_postfix},"
     },
     {
@@ -1064,9 +1064,9 @@
      "role": "mirror",
      "sym": "RsProxyCN",
      "code": "rsproxycn",
-     "name": "RsProxyCN",
+     "name": "字节跳动基础架构Dev Infra",
      "url": "https://rsproxy.cn",
-     "speed_url": null,
+     "speed_url": "https://rsproxy.cn/api/v1/crates/windows/0.58.0/download",
      "note": null
     }
    ]

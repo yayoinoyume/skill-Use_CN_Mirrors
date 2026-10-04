@@ -213,6 +213,10 @@ def main():
         recipe_dirs = [chsrc_dir / "src" / "recipe" / "lang", chsrc_dir / "src" / "recipe" / "os", chsrc_dir / "src" / "recipe" / "ware"]
         recipe_files = [p for rd in recipe_dirs for p in sorted(rd.rglob("*.c"))
                         if p.name not in ("common.h", "rawstr4c.h") and "rawstr4c" not in p.name]
+        # recipe 的 common.h 里定义了专用镜像（如 RsProxyCN/FlutterCN），单独解析合并
+        common_hs = [p for rd in recipe_dirs for p in sorted(rd.rglob("common.h"))]
+        for ch in common_hs:
+            mirrors = parse_mirrors(ch.read_text(encoding="utf-8", errors="replace"), mirrors)
         for rf in recipe_files:
             mirrors = parse_mirrors(rf.read_text(encoding="utf-8", errors="replace"), mirrors)
         print(f"解析到 {len(mirrors)} 个镜像站定义", file=sys.stderr)
